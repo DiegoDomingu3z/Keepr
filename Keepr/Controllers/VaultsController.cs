@@ -44,11 +44,13 @@ namespace Keepr.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize]
 
         public ActionResult<Vault> GetById(int id)
         {
             try
             {
+
                 Vault vault = _vs.GetById(id);
                 return vault;
             }
@@ -60,11 +62,11 @@ namespace Keepr.Controllers
         }
 
         [HttpGet("{id}/keeps")]
-        public ActionResult<List<VaultKeep>> GetVaultKeeps(int id)
+        public ActionResult<List<VaultKeepViewModal>> GetVaultKeeps(int id)
         {
             try
             {
-                List<VaultKeep> vaultKeep = _vks.GetVaultKeeps(id);
+                List<VaultKeepViewModal> vaultKeep = _vks.GetVaultKeeps(id);
                 return vaultKeep;
             }
             catch (System.Exception e)

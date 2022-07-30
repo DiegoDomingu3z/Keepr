@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -15,6 +16,7 @@ namespace Keepr.Services
 
         internal Vault Create(Vault vaultData, string id)
         {
+
             return _repo.Create(vaultData);
         }
 
@@ -25,9 +27,17 @@ namespace Keepr.Services
             {
                 throw new Exception("Invalid Id");
             }
+
             return found;
 
         }
+
+        internal List<Vault> GetMyVaults(string id)
+        {
+            return _repo.GetMyVaults(id);
+        }
+
+
 
         internal Vault Edit(int id, string userId, Vault vaultData)
         {
@@ -56,5 +66,7 @@ namespace Keepr.Services
 
 
         }
+
+
     }
 }

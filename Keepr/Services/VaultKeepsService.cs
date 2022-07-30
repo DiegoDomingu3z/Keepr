@@ -13,14 +13,21 @@ namespace Keepr.Services
             _repo = repo;
         }
 
-        internal VaultKeep Create(VaultKeep vaultKeepData)
+        internal VaultKeep Create(VaultKeep vaultKeepData, string id)
         {
+
             return _repo.Create(vaultKeepData);
         }
 
-        internal List<VaultKeep> GetVaultKeeps(int id)
+        internal List<VaultKeepViewModal> GetVaultKeeps(int id)
         {
             return _repo.GetVaultsKeeps(id);
+        }
+
+        internal string Delete(int id, string userId)
+        {
+            return _repo.Delete(id);
+
         }
     }
 }

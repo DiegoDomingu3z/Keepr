@@ -30,14 +30,33 @@ namespace Keepr.Repositories
             return vaultKeepData;
         }
 
-        internal List<VaultKeep> GetVaultsKeeps(int id)
+
+        internal List<VaultKeepViewModal> GetVaultsKeeps(int id)
         {
             string sql = @"
             SELECT
-            vk.*
+            k.*,
+            vk.id AS VaultId,
+            a.*
             FROM vaultKeeps vk
-            WHERE id = @id";
-            return _db.Query<VaultKeep>(sql, new { id }).ToList();
+            JOIN keeps k ON vk.keepId = k.id
+            JOIN accounts a ON k.creatorId = a.id
+            WHERE vk.vaultId = @id;";
+            return _db.Query<VaultKeepViewModal, Profile, VaultKeepViewModal>(sql, (VaultKeep, profile) =>
+            {
+                VaultKeep.Creator = profile;
+                return VaultKeep;
+            }, new { id }).ToList();
         }
+
+        internal string Delete(int id)
+        {
+            string sql = @"
+            DELETE FROM vaultKeeps WHERE id = @id LIMIT 1";
+            _db.Execute(sql, new { id });
+
+            return ("deleted");
+        }
+
     }
 }

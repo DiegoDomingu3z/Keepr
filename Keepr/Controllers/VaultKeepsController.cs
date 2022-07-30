@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class VaultKeepsController : Controller
     {
 
@@ -21,6 +21,8 @@ namespace Keepr.Controllers
         }
 
 
+
+
         [HttpPost]
 
         public async Task<ActionResult<VaultKeep>> Create([FromBody] VaultKeep vaultKeepData)
@@ -29,12 +31,31 @@ namespace Keepr.Controllers
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 vaultKeepData.CreatorId = userInfo.Id;
-                VaultKeep newVaultKeep = _vks.Create(vaultKeepData);
+                VaultKeep newVaultKeep = _vks.Create(vaultKeepData, userInfo.Id);
                 return Ok(newVaultKeep);
 
             }
             catch (System.Exception e)
             {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+
+        public async Task<ActionResult<string>> Delete(int id)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                string deletedVaultKeep = _vks.Delete(id, userInfo.Id);
+                return Ok("deleted");
+
+            }
+            catch (System.Exception e)
+            {
+
                 return BadRequest(e.Message);
             }
         }
