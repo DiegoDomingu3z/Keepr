@@ -9,9 +9,12 @@ namespace Keepr.Services
     {
         private readonly VaultsRepository _repo;
 
-        public VaultsService(VaultsRepository repo)
+        private readonly VaultKeepsRepository _kRep;
+
+        public VaultsService(VaultsRepository repo, VaultKeepsRepository kRep)
         {
             _repo = repo;
+            _kRep = kRep;
         }
 
         internal Vault Create(Vault vaultData, string id)
@@ -20,7 +23,7 @@ namespace Keepr.Services
             return _repo.Create(vaultData);
         }
 
-        internal Vault GetById(int id)
+        internal Vault GetById(int id, string userId)
         {
             Vault found = _repo.GetById(id);
             if (found == null)
@@ -28,12 +31,31 @@ namespace Keepr.Services
                 throw new Exception("Invalid Id");
             }
 
+            if (found.IsPrivate == true && found.CreatorId != userId)
+            {
+                throw new Exception("Forbidden");
+            }
+
             return found;
 
         }
 
+        internal List<VaultKeepViewModal> GetVaultKeeps(int id, string userId)
+        {
+            Vault vault = _repo.GetById(id);
+            if (vault.IsPrivate == true && vault.CreatorId != userId)
+            {
+                throw new Exception("Forbidden");
+            }
+
+            return _kRep.GetVaultsKeeps(id);
+        }
+
+
+
         internal List<Vault> GetMyVaults(string id)
         {
+
             return _repo.GetMyVaults(id);
         }
 
@@ -41,7 +63,7 @@ namespace Keepr.Services
 
         internal Vault Edit(int id, string userId, Vault vaultData)
         {
-            Vault original = GetById(id);
+            Vault original = GetById(id, userId);
             if (original.CreatorId != userId)
             {
                 throw new Exception("Forbidden");
@@ -56,7 +78,7 @@ namespace Keepr.Services
 
         internal Vault Delete(int id, string userId)
         {
-            Vault vault = GetById(id);
+            Vault vault = GetById(id, userId);
             if (vault.CreatorId != userId)
             {
                 throw new Exception("Forbidden");

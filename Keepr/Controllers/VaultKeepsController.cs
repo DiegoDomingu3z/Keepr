@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-    [Authorize]
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class VaultKeepsController : Controller
     {
@@ -30,8 +30,10 @@ namespace Keepr.Controllers
             try
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+
                 vaultKeepData.CreatorId = userInfo.Id;
-                VaultKeep newVaultKeep = _vks.Create(vaultKeepData, userInfo.Id);
+                vaultKeepData.Creator = userInfo;
+                VaultKeep newVaultKeep = _vks.Create(vaultKeepData, userInfo?.Id);
                 return Ok(newVaultKeep);
 
             }

@@ -32,7 +32,8 @@ namespace Keepr.Services
 
         internal List<Vault> GetProfileVaults(string id)
         {
-            return _repo.GetProfileVaults(id);
+            List<Vault> vault = _repo.GetProfileVaults(id);
+            return vault.FindAll(v => v.IsPrivate == false);
         }
     }
 }

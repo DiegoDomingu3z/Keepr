@@ -30,6 +30,21 @@ namespace Keepr.Repositories
             return vaultKeepData;
         }
 
+        internal VaultKeep GetById(int id)
+        {
+            string sql = @"
+           SELECT
+           a.*,
+           vk.*
+           FROM vaultKeeps vk
+           JOIN accounts a ON vk.creatorId = a.id
+           WHERE vk.id = @id";
+            return _db.Query<Profile, VaultKeep, VaultKeep>(sql, (profile, vaultK) =>
+            {
+                vaultK.CreatorId = profile.Id;
+                return vaultK;
+            }, new { id }).FirstOrDefault();
+        }
 
         internal List<VaultKeepViewModal> GetVaultsKeeps(int id)
         {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -8,26 +7,50 @@ namespace Keepr.Services
     {
         private readonly VaultKeepsRepository _repo;
 
-        public VaultKeepsService(VaultKeepsRepository repo)
+        private readonly VaultsRepository _vr;
+
+        public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vr)
         {
             _repo = repo;
+            _vr = vr;
         }
 
-        internal VaultKeep Create(VaultKeep vaultKeepData, string id)
+        internal VaultKeep Create(VaultKeep vaultKeepData, string userId)
         {
 
+            Vault found = _vr.GetById(vaultKeepData.VaultId);
+            if (found.CreatorId != userId)
+            {
+                throw new System.Exception("Forbidden");
+            }
             return _repo.Create(vaultKeepData);
         }
 
-        internal List<VaultKeepViewModal> GetVaultKeeps(int id)
+
+        private VaultKeep GetById(int id)
         {
-            return _repo.GetVaultsKeeps(id);
+            VaultKeep found = _repo.GetById(id);
+            if (found == null)
+            {
+                throw new System.Exception("invalid Id");
+            }
+
+            return found;
         }
+
+
 
         internal string Delete(int id, string userId)
         {
+            VaultKeep found = GetById(id);
+            if (found.CreatorId != userId)
+            {
+                throw new System.Exception("Forbidden");
+            }
             return _repo.Delete(id);
 
         }
+
+
     }
 }

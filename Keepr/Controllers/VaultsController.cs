@@ -3,14 +3,12 @@ using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class VaultsController : Controller
     {
 
@@ -43,15 +41,16 @@ namespace Keepr.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        [Authorize]
 
-        public ActionResult<Vault> GetById(int id)
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<Vault>> GetById(int id)
         {
             try
             {
-
-                Vault vault = _vs.GetById(id);
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                Vault vault = _vs.GetById(id, userInfo?.Id);
                 return vault;
             }
             catch (System.Exception e)
@@ -62,12 +61,14 @@ namespace Keepr.Controllers
         }
 
         [HttpGet("{id}/keeps")]
-        public ActionResult<List<VaultKeepViewModal>> GetVaultKeeps(int id)
+
+        public async Task<ActionResult<List<VaultKeepViewModal>>> GetVaultKeeps(int id)
         {
             try
             {
-                List<VaultKeepViewModal> vaultKeep = _vks.GetVaultKeeps(id);
-                return vaultKeep;
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                List<VaultKeepViewModal> vaultKeep = _vs.GetVaultKeeps(id, userInfo?.Id);
+                return Ok(vaultKeep);
             }
             catch (System.Exception e)
             {
