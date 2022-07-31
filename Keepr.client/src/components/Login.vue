@@ -8,7 +8,7 @@
       Login
     </button>
 
-    <div class="dropdown my-2 my-lg-0" v-else>
+    <div class="dropdown my-2 my-lg-0 bg-secondary rounded" v-else>
       <div
         class="dropdown-toggle selectable"
         data-bs-toggle="dropdown"
@@ -19,10 +19,10 @@
           <img
             :src="account.picture"
             alt="account photo"
-            height="40"
+            height="50"
             class="rounded"
           />
-          <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
+          <span class="mx-3 text-white">{{ account.name }}</span>
         </div>
       </div>
       <div

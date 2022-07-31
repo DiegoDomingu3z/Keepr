@@ -46,13 +46,13 @@ namespace Keepr.Repositories
             }, new { id }).FirstOrDefault();
         }
 
-        // FIXME postman test failing because of this
+
         internal List<VaultKeepViewModal> GetVaultsKeeps(int id)
         {
             string sql = @"
             SELECT
             k.*,
-            vk.id AS VaultId,
+            vk.id AS VaultKeepId,
             a.*
             FROM vaultKeeps vk
             JOIN keeps k ON vk.keepId = k.id
