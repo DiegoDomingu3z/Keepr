@@ -34,6 +34,7 @@ namespace Keepr.Controllers
                 vaultKeepData.CreatorId = userInfo.Id;
                 vaultKeepData.Creator = userInfo;
                 VaultKeep newVaultKeep = _vks.Create(vaultKeepData, userInfo?.Id);
+
                 return Ok(newVaultKeep);
 
             }
