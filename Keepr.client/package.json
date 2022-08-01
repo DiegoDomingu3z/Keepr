@@ -15,6 +15,7 @@
     "socket.io-client": "^4.1.2",
     "sweetalert2": "^11.1.9",
     "vue": "^3.2.11",
+    "vue-horizontal-scroll": "^0.2.4",
     "vue-router": "^4.0.8"
   },
   "devDependencies": {

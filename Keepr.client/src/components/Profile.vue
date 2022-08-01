@@ -16,7 +16,7 @@
   </div>
   <div class="row px-5 pt-5 mx-4">
     <div class="d-flex">
-      <h2>
+      <h1>
         Vaults
         <i
           v-if="account.id == profile.id"
@@ -25,14 +25,50 @@
           data-bs-toggle="modal"
           data-bs-target="#vault"
         ></i>
-      </h2>
+      </h1>
     </div>
   </div>
-  <div>
-    <img v-for="v in myVaults" :key="v.img" :src="v.img" alt="" />
+  <div class="row" v-if="account.id == profile.id">
+    <div
+      class="col-md-2 my-2 d-flex justify-content-evenly"
+      v-for="v in myVaults"
+      :key="v.img"
+    >
+      <img class="img-fluid vault-img rounded" :src="v.img" alt="" />
+    </div>
   </div>
-  <div class="row px-5 mx-4 pt-5"><h1>Keeps</h1></div>
+  <div class="row" v-else>
+    <div
+      class="col-md-2 my-2 d-flex justify-content-evenly"
+      v-for="v in vault"
+      :key="v.img"
+    >
+      <img class="img-fluid vault-img" :src="v.img" alt="" />
+    </div>
+  </div>
+  <div class="row px-5 mx-4 pt-5">
+    <h1>
+      Keeps
+      <i
+        class="mdi mdi-plus text-info"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#create-keep"
+      ></i>
+    </h1>
+  </div>
+  <div class="masonry-frame">
+    <div class="m-2" v-for="k in keep" :key="k.img">
+      <div
+        class="rounded keep-img d-flex align-items-end"
+        :style="`background-image: url(${k.img})`"
+      >
+        <div class="ms-2 fs-5 text-white">{{ k.name }}</div>
+      </div>
+    </div>
+  </div>
   <VaultModal />
+  <CreateKeepModal />
 </template>
 
 
@@ -45,7 +81,10 @@ import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 import { vaultsService } from '../services/VaultsService'
 import { accountService } from '../services/AccountService'
+import { keepsService } from '../services/KeepsService'
+
 export default {
+
   setup() {
     const route = useRoute()
     onMounted(async () => {
@@ -59,6 +98,7 @@ export default {
         Pop.toast(error.message)
       }
     })
+
     return {
 
       profile: computed(() => AppState.activeProfile),
@@ -73,6 +113,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.masonry-frame {
+  columns: 6 200px;
+
+  div {
+    break-inside: avoid;
+  }
+}
 .profile-img {
   height: 150px;
   width: 150px;
@@ -83,5 +130,17 @@ export default {
     text-align: center;
     padding-top: 1em;
   }
+}
+
+.vault-img {
+  height: 200px;
+  width: 200px;
+}
+.keep-img {
+  height: 200px;
+  width: 200px;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
 }
 </style>
