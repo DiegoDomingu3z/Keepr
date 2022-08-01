@@ -11,6 +11,8 @@ namespace Keepr.Models
 
         public string CreatorId { get; set; }
 
+        public string Img { get; set; }
+
         public Profile Creator { get; set; }
 
 

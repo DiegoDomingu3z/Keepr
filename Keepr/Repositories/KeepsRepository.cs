@@ -49,6 +49,22 @@ namespace Keepr.Repositories
             }, new { id }).FirstOrDefault();
         }
 
+        internal List<Keep> GetMyKeeps(string id)
+        {
+            string sql = @"
+            SELECT
+            k.*,
+            a.*
+            FROM keeps k
+            JOIN accounts a ON k.creatorId = a.id
+            WHERE k.creatorId = @id";
+            return _db.Query<Keep, Profile, Keep>(sql, (keep, prof) =>
+            {
+                keep.Creator = prof;
+                return keep;
+            }, new { id }).ToList();
+        }
+
         internal Keep Create(Keep keepData)
         {
             string sql = @"
@@ -76,6 +92,8 @@ namespace Keepr.Repositories
 
             _db.Execute(sql, original);
         }
+
+
 
         internal void Delete(int id)
         {

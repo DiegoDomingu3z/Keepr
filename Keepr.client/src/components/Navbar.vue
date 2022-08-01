@@ -14,7 +14,7 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <div><input type="text" /></div>
+
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto"></ul>
 

@@ -60,5 +60,12 @@ namespace Keepr.Services
             _repo.Delete(id);
             return keep;
         }
+
+        internal List<Keep> GetMyKeeps(string id)
+        {
+            return _repo.GetMyKeeps(id);
+        }
+
+
     }
 }

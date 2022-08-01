@@ -10,6 +10,14 @@ class AccountService {
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
+
+  }
+
+  async getMyVaults() {
+    const res = await api.get('account/vaults')
+    logger.log(res.data)
+    AppState.myVaults = res.data
+
   }
 }
 

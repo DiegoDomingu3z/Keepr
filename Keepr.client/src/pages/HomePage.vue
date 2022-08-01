@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="masonry-frame">
-      <div v-for="k in keep" :key="k.id">
+    <div class="masonry-frame mt-3">
+      <div v-for="k in keep" :key="k.id" class="m-2">
         <Keep :keep="k" />
       </div>
     </div>
@@ -35,9 +35,6 @@ export default {
 
 <style lang="scss" scoped>
 .masonry-frame {
-  columns: 4;
-  div {
-    break-inside: avoid;
-  }
+  columns: 4 300px;
 }
 </style>
