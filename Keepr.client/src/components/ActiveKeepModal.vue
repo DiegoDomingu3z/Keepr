@@ -34,7 +34,12 @@
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li v-for="v in vault" :key="v.id">
-                  <a class="dropdown-item" href="#">{{ v.name }}</a>
+                  <a
+                    @click="createVaultKeep({ keepId: keep.id, vaultId: v.id })"
+                    class="dropdown-item"
+                    href="#"
+                    >{{ v.name }}</a
+                  >
                 </li>
               </ul>
             </div>
@@ -70,11 +75,19 @@ import Pop from '../utils/Pop'
 import { keepsService } from '../services/KeepsService'
 import { Modal } from 'bootstrap'
 import { useRoute, useRouter } from 'vue-router'
+import { vaultKeepsService } from '../services/VaultKeepsService'
 export default {
   setup() {
     const router = useRouter()
     return {
-
+      async createVaultKeep(data) {
+        try {
+          await vaultKeepsService.create(data)
+        } catch (error) {
+          logger.log(error)
+          Pop.toast(error.message)
+        }
+      },
       async deleteKeep(id) {
         try {
           if (await Pop.confirm("This action is irreversible")) {

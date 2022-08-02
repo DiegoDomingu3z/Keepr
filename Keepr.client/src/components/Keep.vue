@@ -1,15 +1,13 @@
 <template>
-  <div
-    @click="setActive"
-    class="img-container rounded selectable"
-    :style="`background-image: Url(${keep.img})`"
-  >
-    <div class="d-flex justify-content-between mx-2 pt-1">
-      <span
-        ><h4>{{ keep.name }}</h4></span
-      ><span @click="goToProfile"
-        ><img class="profile-image" :src="keep.creator.picture" alt=""
-      /></span>
+  <div @click="setActive" class="img-container rounded selectable">
+    <img class="img-fluid rounded" :src="keep.img" alt="" />
+    <div class="d-flex justify-content-between pt-1">
+      <div class="keep-info text-white">
+        <h3>{{ keep.name }}</h3>
+      </div>
+      <div class="keep-info-2" @click="goToProfile">
+        <img class="profile-image" :src="keep.creator.picture" alt="" />
+      </div>
     </div>
   </div>
   <Modal id="active-keep">
@@ -33,6 +31,7 @@ export default {
       goToProfile() {
         router.push({ name: "Profile", params: { id: props.keep.creator.id } })
         console.log(props.keep.creator.id);
+
       },
       async setActive() {
         try {
@@ -51,10 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .img-container {
-  background-position: center;
-  background-size: cover;
-  object-fit: cover;
-  height: 50vh;
+  position: relative;
 }
 .img-container:hover {
   transform: scale(1.02);
@@ -65,5 +61,19 @@ export default {
   all: unset;
   height: 40px;
   border-radius: 50%;
+}
+
+.keep-info {
+  position: absolute;
+  z-index: 100;
+  left: 1em;
+  bottom: 0.3em;
+}
+
+.keep-info-2 {
+  position: absolute;
+  z-index: 100;
+  right: 1em;
+  bottom: 0.3em;
 }
 </style>

@@ -20,6 +20,7 @@ export default {
     onMounted(async () => {
       try {
         await keepsService.getAllKeeps()
+
       } catch (error) {
         logger.log(error)
         Pop.toast(error.Message)

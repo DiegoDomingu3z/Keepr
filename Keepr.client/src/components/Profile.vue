@@ -30,11 +30,17 @@
   </div>
   <div class="row" v-if="account.id == profile.id">
     <div
-      class="col-md-2 my-2 d-flex justify-content-evenly"
+      class="col-md-2 my-2 d-flex justify-content-evenly vault-img"
       v-for="v in myVaults"
       :key="v.img"
     >
-      <img class="img-fluid vault-img rounded" :src="v.img" alt="" />
+      <img
+        @click="goToVault(v.id)"
+        class="img-fluid rounded"
+        :src="v.img"
+        alt=""
+      />
+      <div class="vault-name text-start fs-5 text-white">{{ v.name }}</div>
     </div>
   </div>
   <div class="row" v-else>
@@ -57,13 +63,11 @@
       ></i>
     </h1>
   </div>
-  <div class="masonry-frame">
+  <div class="masonry-frame pb-4">
     <div class="m-2" v-for="k in keep" :key="k.img">
-      <div
-        class="rounded keep-img d-flex align-items-end"
-        :style="`background-image: url(${k.img})`"
-      >
-        <div class="ms-2 fs-5 text-white">{{ k.name }}</div>
+      <div class="vault-img">
+        <img class="img-fluid selectable rounded" :src="k.img" alt="" />
+        <div class="vault-name ms-2 fs-5 text-white">{{ k.name }}</div>
       </div>
     </div>
   </div>
@@ -74,7 +78,7 @@
 
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { profilesService } from '../services/ProfilesService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
@@ -87,12 +91,12 @@ export default {
 
   setup() {
     const route = useRoute()
+    const router = useRouter()
     onMounted(async () => {
       try {
         await profilesService.getUserProf(route.params.id)
         await profilesService.getUserKeeps(route.params.id)
         await profilesService.getUserVaults(route.params.id)
-
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message)
@@ -100,12 +104,22 @@ export default {
     })
 
     return {
+      async goToVault(id) {
+        try {
+          await vaultsService.getById(id)
+          router.push({ name: "Vault", params: { id: this.activeVault.id } })
+        } catch (error) {
+          logger.log(error)
+          Pop.toast(error.message)
+        }
+      },
 
       profile: computed(() => AppState.activeProfile),
       vault: computed(() => AppState.activeProfileVaults),
       keep: computed(() => AppState.activeProfileKeeps),
       account: computed(() => AppState.account),
-      myVaults: computed(() => AppState.myVaults)
+      myVaults: computed(() => AppState.myVaults),
+      activeVault: computed(() => AppState.activeVault)
     }
   }
 }
@@ -133,9 +147,16 @@ export default {
 }
 
 .vault-img {
-  height: 200px;
-  width: 200px;
+  position: relative;
 }
+
+.vault-name {
+  position: absolute;
+  z-index: 100;
+  left: 0.5em;
+  bottom: 0.2em;
+}
+
 .keep-img {
   height: 200px;
   width: 200px;
