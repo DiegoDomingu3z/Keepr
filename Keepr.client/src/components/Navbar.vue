@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-info px-3 d-flex">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <h1>KeepR</h1>
+      <h1 class="title">KeepR</h1>
     </router-link>
     <button
       class="navbar-toggler"
@@ -43,5 +43,9 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.title {
+  color: #636e72;
 }
 </style>

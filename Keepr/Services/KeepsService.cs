@@ -25,10 +25,11 @@ namespace Keepr.Services
             {
                 throw new Exception("Invalid Id");
             }
-            found.Views++;
+            _repo.Views(found, id);
             return found;
 
         }
+
 
         internal Keep Create(Keep keepData, string id)
         {
@@ -65,6 +66,14 @@ namespace Keepr.Services
         {
             return _repo.GetMyKeeps(id);
         }
+
+
+        // internal Keep Kept(int id, int vaultKeepId)
+        // {
+        //     Keep found = _repo.GetById(id);
+        //     _repo.Kept(found, id, vaultKeepId);
+        //     return found;
+        // }
 
 
     }

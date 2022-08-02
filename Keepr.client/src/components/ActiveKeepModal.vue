@@ -6,8 +6,12 @@
       </div>
       <div class="col-md-6">
         <div class="text-center pt-3 fs-5">
-          <i class="mdi mdi-eye-outline text-info pe-1"></i>{{ keep.views
-          }}<i class="mdi mdi-book-outline text-info ps-5 pe-1"></i
+          <i title="Total Views" class="mdi mdi-eye-outline text-info pe-1"></i
+          >{{ keep.views
+          }}<i
+            title="Total Kept's"
+            class="mdi mdi-book-outline text-info ps-5 pe-1"
+          ></i
           >{{ keep.kept }}
         </div>
         <div class="text-center pt-4">
@@ -24,15 +28,15 @@
           <div class="">
             <div class="dropdown">
               <button
+                title="Add to vault"
                 class="btn btn-info dropdown-toggle"
                 type="button"
-                id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Add to Vault
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ul class="dropdown-menu">
                 <li v-for="v in vault" :key="v.id">
                   <a
                     @click="createVaultKeep({ keepId: keep.id, vaultId: v.id })"
@@ -46,6 +50,7 @@
           </div>
           <div v-if="keep.creator?.id == account.id">
             <i
+              title="Delete Keep"
               @click="deleteKeep(keep.id)"
               class="mdi mdi-delete-outline text-danger fs-3 selectable"
             ></i>
@@ -53,6 +58,7 @@
 
           <div class="pt-2">
             <img
+              title="Go To Profile"
               @click="goToProfile"
               class="img-fluid img-profile selectable"
               :src="keep.creator?.picture"

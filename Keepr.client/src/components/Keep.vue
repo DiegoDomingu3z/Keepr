@@ -1,12 +1,18 @@
 <template>
   <div @click="setActive" class="img-container rounded selectable">
-    <img class="img-fluid rounded" :src="keep.img" alt="" />
+    <img title="See Details" class="img-fluid rounded" :src="keep.img" alt="" />
+
     <div class="d-flex justify-content-between pt-1">
-      <div class="keep-info text-white">
+      <div class="keep-info text-white fx-bolder">
         <h3>{{ keep.name }}</h3>
       </div>
-      <div class="keep-info-2" @click="goToProfile">
-        <img class="profile-image" :src="keep.creator.picture" alt="" />
+      <div class="keep-info-2" @click.stop="goToProfile">
+        <img
+          title="Go To Profile"
+          class="profile-image"
+          :src="keep.creator.picture"
+          alt=""
+        />
       </div>
     </div>
   </div>
@@ -41,7 +47,7 @@ export default {
           logger.log(error)
           Pop.toast(error.message)
         }
-      }
+      },
     }
   }
 }
@@ -75,5 +81,9 @@ export default {
   z-index: 100;
   right: 1em;
   bottom: 0.3em;
+}
+
+h3 {
+  text-shadow: 2px 2px black;
 }
 </style>

@@ -11,11 +11,14 @@ namespace Keepr.Services
 
         private readonly KeepsRepository _kr;
 
-        public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vr, KeepsRepository kr)
+        private readonly KeepsService _ks;
+
+        public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vr, KeepsRepository kr, KeepsService ks)
         {
             _repo = repo;
             _vr = vr;
             _kr = kr;
+            _ks = ks;
         }
 
         internal VaultKeep Create(VaultKeep vaultKeepData, string userId)
@@ -39,7 +42,6 @@ namespace Keepr.Services
                 throw new System.Exception("invalid Id");
             }
             Keep keep = _kr.GetById(found.KeepId);
-            keep.Kept++;
 
             return found;
         }

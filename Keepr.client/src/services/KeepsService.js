@@ -19,7 +19,9 @@ class KeepsService {
     async setActive(id) {
         const res = await api.get('api/keeps/' + id)
         logger.log(res.data)
+        res.data.views += 1
         AppState.activeKeep = res.data
+
     }
 
 

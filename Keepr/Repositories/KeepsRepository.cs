@@ -31,6 +31,17 @@ namespace Keepr.Repositories
             }).ToList();
         }
 
+        internal void Views(Keep found, int id)
+        {
+            string sql = @"
+            UPDATE keeps
+            SET
+            views = @Views + 1
+            WHERE 
+            keeps.id = @id";
+            _db.Execute(sql, found);
+        }
+
         internal Keep GetById(int id)
         {
             string sql = @"
@@ -49,6 +60,8 @@ namespace Keepr.Repositories
             }, new { id }).FirstOrDefault();
         }
 
+
+
         internal List<Keep> GetMyKeeps(string id)
         {
             string sql = @"
@@ -64,6 +77,18 @@ namespace Keepr.Repositories
                 return keep;
             }, new { id }).ToList();
         }
+
+        // internal void Kept(Keep found, int id, int vaultKeepId)
+        // {
+        //     string sql = @"
+        //     UPDATE keeps
+        //     SET
+        //     kept = @Kept + 1,
+        //     vaultKeepId = @VaultKeepId
+        //     WHERE
+        //     keeps.id = @id";
+        //     _db.Execute(sql, found);
+        // }
 
         internal Keep Create(Keep keepData)
         {
