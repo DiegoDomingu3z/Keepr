@@ -4,8 +4,8 @@ import { api } from "./AxiosService"
 
 class KeepsService {
 
-    async getAllKeeps() {
-        const res = await api.get('api/keeps')
+    async getAllKeeps(query = {}) {
+        const res = await api.get('api/keeps/', { params: query })
         logger.log(res.data)
         AppState.keeps = res.data
     }
@@ -22,6 +22,13 @@ class KeepsService {
         res.data.views += 1
         AppState.activeKeep = res.data
 
+    }
+
+
+    async searchKeep(query = '') {
+        const res = await api.get(`api/keeps?query=${query}`)
+        logger.log(res.data)
+        AppState.keeps = res.data
     }
 
 

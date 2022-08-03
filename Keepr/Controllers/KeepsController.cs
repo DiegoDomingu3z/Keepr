@@ -22,12 +22,13 @@ namespace Keepr.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<Keep>>> GetAll()
+        // Implementing search
+        public async Task<ActionResult<List<Keep>>> GetAll(string query)
         {
             try
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                List<Keep> keep = _ks.GetAll();
+                List<Keep> keep = _ks.GetAll(query);
                 return Ok(keep);
             }
             catch (System.Exception e)

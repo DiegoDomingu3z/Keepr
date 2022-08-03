@@ -13,9 +13,9 @@ namespace Keepr.Services
         {
             _repo = repo;
         }
-        internal List<Keep> GetAll()
+        internal List<Keep> GetAll(string query = "")
         {
-            return _repo.GetAll();
+            return _repo.GetAll(query);
         }
 
         internal Keep GetById(int id)

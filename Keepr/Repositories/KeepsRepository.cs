@@ -16,19 +16,21 @@ namespace Keepr.Repositories
             _db = db;
         }
 
-        internal List<Keep> GetAll()
+        internal List<Keep> GetAll(string query = "")
         {
+            string stringQuery = "%" + query + "%";
             string sql = @"
             SELECT
             k.*,
             a.*
             FROM keeps k
-            JOIN accounts a ON k.creatorId = a.id";
+            JOIN accounts a ON k.creatorId = a.id
+            WHERE k.name LIKE @stringQuery";
             return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
             {
                 keep.Creator = profile;
                 return keep;
-            }).ToList();
+            }, new { stringQuery }).ToList();
         }
 
         internal void Views(Keep found, int id)
