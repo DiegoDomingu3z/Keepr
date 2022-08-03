@@ -1,6 +1,11 @@
 <template>
   <div @click="setActive" class="img-container rounded selectable">
-    <img title="See Details" class="img-fluid rounded" :src="keep.img" alt="" />
+    <img
+      title="See Details"
+      class="img-fluid rounded elevation-2"
+      :src="keep.img"
+      alt=""
+    />
 
     <div class="d-flex justify-content-between pt-1">
       <div class="keep-info text-white fx-bolder">

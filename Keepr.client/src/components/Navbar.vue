@@ -15,7 +15,7 @@
       <span class="navbar-toggler-icon" />
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse pe-2" id="navbarText">
       <ul class="navbar-nav me-auto"></ul>
 
       <!-- LOGIN COMPONENT HERE -->

@@ -42,6 +42,24 @@ namespace Keepr.Controllers
         }
 
 
+        [HttpPut]
+        [Authorize]
+        public async Task<ActionResult<Account>> Edit([FromBody] Account accountData)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                Account account = _accountService.Edit(accountData, userInfo.Email);
+                return Ok(account);
+            }
+            catch (System.Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+
         [HttpGet("vaults")]
         public async Task<ActionResult<List<Vault>>> GetMyVaults()
         {

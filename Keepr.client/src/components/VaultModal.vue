@@ -20,51 +20,53 @@
           ></button>
         </div>
         <div class="modal-body m-3">
-          <div class="row">
-            <div class="col-md-12">
-              <label for="title">Title</label>
-              <input
-                class="form-control bg-white"
-                placeholder="Title.."
-                type="text"
-                v-model="vaultData.name"
-              />
+          <form @submit.prevent="createVault" id="vault-form">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="title">Title</label>
+                <input
+                  class="form-control bg-white"
+                  placeholder="Title.."
+                  type="text"
+                  v-model="vaultData.name"
+                />
+              </div>
+              <div class="col-md-12 mt-4">
+                <label for="Img">Image Url</label>
+                <input
+                  class="form-control bg-white"
+                  placeholder="URL..."
+                  type="text"
+                  v-model="vaultData.img"
+                />
+              </div>
+              <div class="col-md-12 mt-4">
+                <textarea
+                  class="w-100 form-control bg-white"
+                  placeholder="Description..."
+                  name=""
+                  id=""
+                  rows="4"
+                  v-model="vaultData.description"
+                ></textarea>
+              </div>
+              <div class="pt-2 d-flex">
+                <input
+                  type="checkbox"
+                  name=""
+                  id=""
+                  v-model="vaultData.isPrivate"
+                />
+                <span class="ps-2">Private?</span>
+              </div>
+              <p class="fw-lighter text-secondary">
+                Private vaults can only be seen by you
+              </p>
             </div>
-            <div class="col-md-12 mt-4">
-              <label for="Img">Image Url</label>
-              <input
-                class="form-control bg-white"
-                placeholder="URL..."
-                type="text"
-                v-model="vaultData.img"
-              />
+            <div class="text-end">
+              <button type="submit" class="btn btn-info">Create</button>
             </div>
-            <div class="col-md-12 mt-4">
-              <textarea
-                class="w-100 form-control bg-white"
-                placeholder="Description..."
-                name=""
-                id=""
-                rows="4"
-                v-model="vaultData.description"
-              ></textarea>
-            </div>
-            <div class="pt-2 d-flex">
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                v-model="vaultData.isPrivate"
-              />
-              <span class="ps-2">Private?</span>
-            </div>
-            <p class="fw-lighter text-secondary">
-              Private vaults can only be seen by you
-            </p>
-          </div>
-          <div class="text-end">
-            <button @click="createVault" class="btn btn-info">Create</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -78,19 +80,26 @@ import { vaultsService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
+import { Modal } from 'bootstrap'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
     const vaultData = ref({})
+    const router = useRouter()
     return {
       vaultData,
       async createVault() {
         try {
           await vaultsService.createVault(vaultData.value)
+          Modal.getOrCreateInstance(document.getElementById("vault")).hide();
+          document.getElementById("vault-form").reset();
+          router.push({ name: "Profile", params: { id: AppState.account.id } })
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message)
         }
       },
+      account: computed(() => AppState.account)
     }
   }
 }

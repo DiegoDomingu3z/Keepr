@@ -9,17 +9,17 @@
       />
     </div>
     <div class="col-md-10 ps-0 header" v-if="account.id == profile.id">
-      <h4>{{ profile.name }}</h4>
+      <h5>{{ profile.name }}</h5>
       <h5>Vaults: {{ myVaults.length }}</h5>
       <h5>Keeps: {{ keep.length }}</h5>
     </div>
     <div class="col-md-10 ps-0 header" v-else>
-      <h4>{{ profile.name }}</h4>
+      <h5>{{ profile.name }}</h5>
       <h5>Vaults: {{ vault.length }}</h5>
       <h5>Keeps: {{ keep.length }}</h5>
     </div>
   </div>
-  <div class="row px-5 pt-5 mx-4">
+  <div class="row px-5 pt-5 mx-4 mb-3 create">
     <div class="d-flex">
       <h1>
         Vaults
@@ -43,7 +43,7 @@
       <img
         title="Go To Vault"
         @click="goToVault(v.id)"
-        class="img-fluid rounded selectable"
+        class="img-fluid rounded selectable elevation-2"
         :src="v.img"
         alt=""
       />
@@ -52,20 +52,20 @@
   </div>
   <div class="row" v-else>
     <div
-      class="col-md-2 my-2 d-flex justify-content-evenly"
+      class="col-md-2 my-2 d-flex justify-content-evenly vault-img pictures"
       v-for="v in vault"
       :key="v.img"
     >
       <img
         title="Go To Vault"
         @click="goToVault(v.id)"
-        class="img-fluid vault-img selectable"
+        class="img-fluid vault-img selectable elevation-2"
         :src="v.img"
         alt=""
       />
     </div>
   </div>
-  <div class="row px-5 mx-4 pt-5">
+  <div class="row px-5 mx-4 pt-5 mb-3 create">
     <h1>
       Keeps
       <i
@@ -82,7 +82,7 @@
       <div @click="setActive(k.id)" class="vault-img pictures">
         <img
           title="Open Modal"
-          class="img-fluid selectable rounded"
+          class="img-fluid selectable rounded elevation-2"
           :src="k.img"
           alt=""
         />
@@ -180,6 +180,13 @@ export default {
   .header {
     text-align: center;
     padding-top: 1em;
+  }
+}
+@media (max-width: 780px) {
+  .create {
+    padding: 0;
+    margin-bottom: 2em;
+    padding-left: 0 !important;
   }
 }
 

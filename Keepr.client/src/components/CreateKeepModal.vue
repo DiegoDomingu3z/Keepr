@@ -19,7 +19,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form action="" @submit.prevent="createKeep" id="createKeep">
+          <form action="" @submit.prevent="createKeep" id="keep-form">
             <div class="row">
               <div class="col-md-12 pt-2">
                 <label for="name">Name</label>
@@ -77,7 +77,8 @@ export default {
       async createKeep() {
         try {
           await keepsService.createKeep(keepData.value)
-          Modal.getOrCreateInstance(document.getElementById('createKeep')).hide();
+          Modal.getOrCreateInstance(document.getElementById('create-keep')).hide();
+          document.getElementById("keep-form").reset();
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, "Oh no! Something went wrong")

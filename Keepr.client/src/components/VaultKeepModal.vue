@@ -48,8 +48,11 @@ import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { vaultKeepsService } from '../services/VaultKeepsService'
+import { useRoute, useRouter } from 'vue-router'
+import { Modal } from 'bootstrap'
 export default {
   setup() {
+    const router = useRouter()
     return {
       async deleteVaultKeep(id) {
         try {
@@ -61,6 +64,11 @@ export default {
           logger.log(error)
           Pop.toast(error.message)
         }
+      },
+      goToProfile() {
+        Modal.getOrCreateInstance(document.getElementById("active-keep")).hide();
+        router.push({ name: "Profile", params: { id: AppState.activeKeep.creatorId } })
+          ;
       },
       vault: computed(() => AppState.activeVault),
       keep: computed(() => AppState.activeKeep),

@@ -13,12 +13,20 @@ class AccountService {
 
   }
 
+
+  async editAccount(accountData) {
+    const res = await api.put("account", accountData)
+    logger.log(res.data)
+  }
+
   async getMyVaults() {
     const res = await api.get('account/vaults')
     logger.log(res.data)
     AppState.myVaults = res.data
 
   }
+
+
 }
 
 export const accountService = new AccountService()

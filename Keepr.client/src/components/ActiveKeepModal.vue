@@ -25,16 +25,21 @@
           </div>
         </div>
         <div class="d-flex justify-content-between">
-          <div class="">
+          <div>
             <div class="dropdown">
               <button
                 title="Add to vault"
-                class="btn btn-info dropdown-toggle"
+                class="
+                  text-info
+                  btn btn-white
+                  border border-info border-2
+                  dropdown-toggle
+                "
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Add to Vault
+                ADD TO VAULT
               </button>
               <ul class="dropdown-menu">
                 <li v-for="v in vault" :key="v.id">
@@ -89,6 +94,7 @@ export default {
       async createVaultKeep(data) {
         try {
           await vaultKeepsService.create(data)
+          Modal.getOrCreateInstance(document.getElementById("active-keep")).hide();
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message)

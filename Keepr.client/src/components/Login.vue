@@ -22,7 +22,7 @@
             height="50"
             class="rounded"
           />
-          <span class="mx-3 text-white">{{ account.name }}</span>
+          <span class="mx-4 text-white">{{ account.name }}</span>
         </div>
       </div>
       <div
