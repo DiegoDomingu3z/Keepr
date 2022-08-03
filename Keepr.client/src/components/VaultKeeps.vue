@@ -31,6 +31,7 @@
       <div v-for="v in vaultKeeps" :key="v.id">
         <div @click="setActive(v.id)" class="pictures keep-img keep">
           <button
+            v-if="vault.creatorId == account.id"
             title="Delete Vault Keep"
             @click.stop="deleteVaultKeep(v.vaultKeepId)"
             class="btn btn-info keep-button"

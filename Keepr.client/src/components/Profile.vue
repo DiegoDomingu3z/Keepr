@@ -9,14 +9,26 @@
       />
     </div>
     <div class="col-md-10 ps-0 header" v-if="account.id == profile.id">
-      <h5>{{ profile.name }}</h5>
-      <h5>Vaults: {{ myVaults.length }}</h5>
-      <h5>Keeps: {{ keep.length }}</h5>
+      <p class="f-20">
+        <b>{{ profile.name }}</b>
+      </p>
+      <p class="f-20">
+        <b>Vaults: {{ myVaults.length }}</b>
+      </p>
+      <p class="f-20">
+        <b>Keeps: {{ keep.length }}</b>
+      </p>
     </div>
     <div class="col-md-10 ps-0 header" v-else>
-      <h5>{{ profile.name }}</h5>
-      <h5>Vaults: {{ vault.length }}</h5>
-      <h5>Keeps: {{ keep.length }}</h5>
+      <p class="f-20">
+        <b>{{ profile.name }}</b>
+      </p>
+      <p class="f-20">
+        <b>Vaults: {{ vault.length }}</b>
+      </p>
+      <p class="f-20">
+        <b>Keeps: {{ keep.length }}</b>
+      </p>
     </div>
   </div>
   <div class="row px-5 pt-5 mx-4 mb-3 create">
@@ -34,9 +46,9 @@
       </h1>
     </div>
   </div>
-  <div class="row" v-if="account.id == profile.id">
+  <div class="media-scroller" v-if="account.id == profile.id">
     <div
-      class="col-md-2 my-2 d-flex justify-content-evenly vault-img pictures"
+      class="my-2 d-flex justify-content-evenly vault-img pictures mx-3"
       v-for="v in myVaults"
       :key="v.img"
     >
@@ -50,9 +62,9 @@
       <div class="vault-name text-start fs-5 text-white">{{ v.name }}</div>
     </div>
   </div>
-  <div class="row" v-else>
+  <div class="media-scroller" v-else>
     <div
-      class="col-md-2 my-2 d-flex justify-content-evenly vault-img pictures"
+      class="my-2 d-flex justify-content-evenly vault-img pictures mx-3"
       v-for="v in vault"
       :key="v.img"
     >
@@ -69,6 +81,7 @@
     <h1>
       Keeps
       <i
+        v-if="account.id == profile.id"
         title="Create Keep"
         class="mdi mdi-plus text-info"
         type="button"
@@ -131,12 +144,9 @@ export default {
       async goToVault(id) {
         try {
           await vaultsService.getById(id)
-          if (AppState.activeVault.creatorId != AppState.account.id && AppState.activeVault.isPrivate == true) {
-            Pop.toast("This Vault is private")
-            router.push({ name: "Home" })
-          }
           router.push({ name: "Vault", params: { id: this.activeVault.id } })
         } catch (error) {
+          router.push({ name: "Home" })
           logger.log(error)
           Pop.toast(error.message)
         }
@@ -164,6 +174,17 @@ export default {
 
 
 <style lang="scss" scoped>
+@media (min-width: 780px) {
+  .media-scroller {
+    display: grid;
+    gap: var(--size-3);
+    grid-auto-flow: column;
+    grid-auto-columns: 21%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+}
+
 .masonry-frame {
   columns: 6 200px;
 
