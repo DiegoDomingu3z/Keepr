@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Keepr.Controllers
 {
     [ApiController]
-    [Authorize]
+
     [Route("api/[controller]")]
     public class VaultKeepsController : Controller
     {
@@ -20,10 +20,25 @@ namespace Keepr.Controllers
             _vks = vks;
         }
 
+        // GET VaultKeepByID
+        [HttpGet("{id}")]
+        public ActionResult<VaultKeep> GetById(int id)
+        {
+            try
+            {
+                VaultKeep keep = _vks.GetById(id);
+                return Ok(keep);
+            }
+            catch (System.Exception e)
+            {
 
+                return BadRequest(e.Message);
+            }
+        }
 
 
         [HttpPost]
+        [Authorize]
 
         public async Task<ActionResult<VaultKeep>> Create([FromBody] VaultKeep vaultKeepData)
         {
@@ -46,6 +61,7 @@ namespace Keepr.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize]
 
         public async Task<ActionResult<string>> Delete(int id)
         {

@@ -9,12 +9,12 @@
       />
     </div>
     <div class="col-md-10 ps-0 header" v-if="account.id == profile.id">
-      <h3>{{ profile.name }}</h3>
+      <h4>{{ profile.name }}</h4>
       <h5>Vaults: {{ myVaults.length }}</h5>
       <h5>Keeps: {{ keep.length }}</h5>
     </div>
     <div class="col-md-10 ps-0 header" v-else>
-      <h3>{{ profile.name }}</h3>
+      <h4>{{ profile.name }}</h4>
       <h5>Vaults: {{ vault.length }}</h5>
       <h5>Keeps: {{ keep.length }}</h5>
     </div>

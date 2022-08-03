@@ -29,19 +29,22 @@ namespace Keepr.Services
             {
                 throw new System.Exception("Forbidden");
             }
+            Keep keep = _kr.GetById(vaultKeepData.KeepId);
+            keep.Kept++;
+            _kr.Kept(keep, keep.Id);
 
             return _repo.Create(vaultKeepData);
         }
 
 
-        private VaultKeep GetById(int id)
+        public VaultKeep GetById(int id)
         {
             VaultKeep found = _repo.GetById(id);
             if (found == null)
             {
                 throw new System.Exception("invalid Id");
             }
-            Keep keep = _kr.GetById(found.KeepId);
+
 
             return found;
         }
@@ -55,8 +58,7 @@ namespace Keepr.Services
             {
                 throw new System.Exception("Forbidden");
             }
-            Keep keep = _kr.GetById(found.KeepId);
-            keep.Kept--;
+
             return _repo.Delete(id);
 
         }

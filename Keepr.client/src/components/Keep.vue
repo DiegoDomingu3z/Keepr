@@ -4,7 +4,7 @@
 
     <div class="d-flex justify-content-between pt-1">
       <div class="keep-info text-white fx-bolder">
-        <h3>{{ keep.name }}</h3>
+        <h2>{{ keep.name }}</h2>
       </div>
       <div class="keep-info-2" @click.stop="goToProfile">
         <img

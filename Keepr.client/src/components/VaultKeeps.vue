@@ -19,12 +19,10 @@
       <div v-for="v in vaultKeeps" :key="v.id">
         <div @click="setActive(v.id)" class="pictures keep-img keep">
           <button
-            title="Delete Vault Keep"
-            v-if="vault.creatorId == account.id"
             @click.stop="deleteVaultKeep(v.vaultKeepId)"
-            class="btn btn-danger keep-button button"
+            class="btn btn-info keep-button"
           >
-            <i class="mdi mdi-trash-can"></i>
+            <i class="mdi mdi-trash-can-outline"></i>
           </button>
           <img class="img-fluid rounded selectable m-2" :src="v.img" alt="" />
           <div class="keep-name text-white">{{ v.name }}</div>
@@ -40,7 +38,7 @@
     </div>
   </div>
   <Modal id="active-keep">
-    <template #body><ActiveKeepModal /> </template>
+    <template #body><VaultKeepModal /> </template>
   </Modal>
 </template>
 
@@ -101,7 +99,7 @@ export default {
 
 <style lang="scss" scoped>
 .masonry-frame {
-  columns: 6 200px;
+  columns: 4 200px;
 
   div {
     break-inside: avoid;
@@ -130,12 +128,13 @@ export default {
   bottom: 0.9em;
 }
 .keep-button {
+  border-radius: 50%;
   position: absolute;
   z-index: 100;
-  left: 0.7em;
-  top: 0.9em;
+  left: 0.3em;
+  top: 0.1em;
   height: 35px;
-  width: 20px;
+  width: 35px;
   display: flex;
   justify-content: center;
 }
