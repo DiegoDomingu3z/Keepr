@@ -1,30 +1,32 @@
 <template>
   <div class="container">
     <div class="row">
-      <div
-        class="
-          col-md-12
-          m-3
-          me-0
-          mb-0
-          pt-5
-          phone-view
-          d-flex
-          justify-content-between
-        "
-      >
-        <h1>{{ vault.name }}</h1>
-        <button
-          v-if="vault.creatorId == account.id"
-          title="Delete Vault"
-          @click="deleteVault"
-          class="btn btn-danger px-4"
+      <div class="mt-3 pb-4">
+        <div
+          class="
+            col-md-12
+            m-3
+            me-0
+            mb-0
+            pt-5
+            phone-view
+            d-flex
+            justify-content-between
+          "
         >
-          Delete Vault
-        </button>
-      </div>
-      <div class="m-3 me-0 phone-view">
-        <h2>Keeps: {{ vaultKeeps.length }}</h2>
+          <h1>{{ vault.name }}</h1>
+          <button
+            v-if="vault.creatorId == account.id"
+            title="Delete Vault"
+            @click="deleteVault"
+            class="btn btn-danger px-4 me-4"
+          >
+            Delete Vault
+          </button>
+        </div>
+        <div class="m-3 me-0 phone-view">
+          <h2>Keeps: {{ vaultKeeps.length }}</h2>
+        </div>
       </div>
     </div>
     <div class="masonry-frame mt-5">
@@ -32,7 +34,7 @@
         <div @click="setActive(v.id)" class="pictures keep-img keep">
           <button
             v-if="vault.creatorId == account.id"
-            title="Delete Vault Keep"
+            title="Delete Vault Keep phone-view-2"
             @click.stop="deleteVaultKeep(v.vaultKeepId)"
             class="btn btn-info keep-button"
           >
@@ -120,6 +122,11 @@ export default {
 @media (max-width: 768px) {
   .phone-view {
     margin: 0 !important;
+  }
+}
+@media (max-width: 768px) {
+  .phone-view-2 {
+    margin-top: 2em !important;
   }
 }
 

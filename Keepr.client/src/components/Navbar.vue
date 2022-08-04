@@ -20,11 +20,11 @@
       <div class="text-center input-group">
         <input
           type="text"
-          class="form-control rounded input"
+          class="form-control input bg-white"
           placeholder="Search..."
           v-model="search"
         />
-        <button type="submit" class="btn bg-white">
+        <button type="submit" class="btn bg-white border">
           <i class="mdi mdi-magnify"></i>
         </button>
       </div>
