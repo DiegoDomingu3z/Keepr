@@ -13,6 +13,7 @@ class KeepsService {
     async createKeep(keepData) {
         const res = await api.post('api/keeps', keepData)
         logger.log(res.data)
+        AppState.activeProfileKeeps.push(res.data)
         AppState.keeps.push(res.data)
     }
 

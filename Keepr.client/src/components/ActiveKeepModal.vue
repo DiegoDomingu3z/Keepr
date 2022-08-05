@@ -24,7 +24,7 @@
             {{ keep.description }}
           </div>
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between pt-4 buttons">
           <div>
             <div class="dropdown">
               <button
@@ -126,8 +126,8 @@ export default {
 
 <style lang="scss" scoped>
 .description {
-  min-height: 330px;
-  max-height: 330px;
+  min-height: 300px;
+  max-height: 300px;
 }
 
 .img-keep {
@@ -139,5 +139,11 @@ export default {
 .img-profile {
   height: 30px;
   width: 30px;
+}
+
+@media (max-width: 780px) {
+  .buttons {
+    padding-bottom: 1em;
+  }
 }
 </style>

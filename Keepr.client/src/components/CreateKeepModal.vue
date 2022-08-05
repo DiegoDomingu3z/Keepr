@@ -24,6 +24,7 @@
               <div class="col-md-12 pt-2">
                 <label for="name">Name</label>
                 <input
+                  required="true"
                   type="text"
                   class="form-control bg-white"
                   placeholder="Name..."
@@ -33,6 +34,7 @@
               <div class="col-md-12 pt-4">
                 <label for="img">Image Url</label>
                 <input
+                  required="true"
                   type="text"
                   class="form-control bg-white"
                   placeholder="Url..."
@@ -42,6 +44,7 @@
               <div class="col-md-12 pt-4">
                 <label for="img">Image Url</label>
                 <textarea
+                  required="true"
                   name="description"
                   class="w-100 form-control bg-white"
                   rows="5"
