@@ -13,7 +13,18 @@ and have all their keeps and vaults shared to the public, but also gives the opt
 implemented to give users an easier and faster way of finding a Keep based on their name.
 
 
-``Techonologies used``
+``HOW TO USE``
+- Start by logging in
+- Browse and click on keeps to open modal to learn more information about the keep
+- Create Keeps 
+- Create Vaults
+- Start adding keeps to your specific Vaults
+- Navigate to account page to update name and profile image
+- Delete keeps from vaults in vault page
+
+
+
+``TECHNOLOGIES UESED``
 
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/C_Sharp_wordmark.svg/1200px-C_Sharp_wordmark.svg.png" width="50">
 - <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" width="50">
