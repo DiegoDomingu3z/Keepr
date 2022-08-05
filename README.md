@@ -24,7 +24,7 @@ implemented to give users an easier and faster way of finding a Keep based on th
 
 
 
-``TECHNOLOGIES UESED``
+``TECHNOLOGIES USED``
 
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/C_Sharp_wordmark.svg/1200px-C_Sharp_wordmark.svg.png" width="50">
 - <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" width="50">
