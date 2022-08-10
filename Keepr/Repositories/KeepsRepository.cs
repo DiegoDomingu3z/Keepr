@@ -91,17 +91,6 @@ namespace Keepr.Repositories
             }, new { id }).ToList();
         }
 
-        // internal void Kept(Keep found, int id)
-        // {
-        //     string sql = @"
-        //     UPDATE keeps
-        //     SET
-        //     kept = @Kept + 1,
-        //     vaultKeepId = @VaultKeepId
-        //     WHERE
-        //     keeps.id = @id";
-        //     _db.Execute(sql, found);
-        // }
 
         internal Keep Create(Keep keepData)
         {
