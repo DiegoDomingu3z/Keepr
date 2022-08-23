@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-info px-3 justify-content-between">
     <div>
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-        <h1 class="title">KeepR.</h1>
+        <h1 class="title">Keepr</h1>
       </router-link>
     </div>
     <!-- <button
