@@ -27,6 +27,7 @@ namespace Keepr.Controllers
         {
             try
             {
+                // bring in account for future business rules
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 List<Keep> keep = _ks.GetAll(query);
                 return Ok(keep);
