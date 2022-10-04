@@ -1,0 +1,1 @@
+import{_ as o}from"./index.a845bb9f.js";import{a as r,o as t,b as s,e as n}from"./vendor.00b2d2ca.js";const a={setup(){return{}}},c={class:"container-fluid"};function i(_,f,p,d,l,m){const e=r("Profile");return t(),s("div",c,[n(e)])}var v=o(a,[["render",i]]);export{v as default};
