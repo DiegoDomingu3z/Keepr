@@ -1,4 +1,4 @@
--- Active: 1661282352975@@SG-Diego-Dom-6598-mysql-master.servers.mongodirector.com@3306@DiegoDev
+-- Active: 1664926877071@@SG-diego-dom-54128.servers.mongodirector.com@3306@DiegoDev
 
 CREATE TABLE
     IF NOT EXISTS accounts(
