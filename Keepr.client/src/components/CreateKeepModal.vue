@@ -42,7 +42,7 @@
                 />
               </div>
               <div class="col-md-12 pt-4">
-                <label for="img">Image Url</label>
+                <label for="img">Image Description</label>
                 <textarea
                   required="true"
                   name="description"
